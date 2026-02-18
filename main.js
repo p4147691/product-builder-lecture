@@ -4,7 +4,6 @@ const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
 // Theme Logic
-// Default to 'dark' if no preference is saved
 let currentTheme = localStorage.getItem('theme');
 if (!currentTheme) {
     currentTheme = 'dark';
@@ -37,7 +36,10 @@ const generateLottoNumbers = () => {
         const randomNumber = Math.floor(Math.random() * 45) + 1;
         numbers.add(randomNumber);
     }
-    return Array.from(numbers).sort((a, b) => a - b);
+    const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+    // 생성된 번호를 로컬 스토리지에 저장
+    localStorage.setItem('lastNumbers', JSON.stringify(sortedNumbers));
+    return sortedNumbers;
 };
 
 const displayNumbers = (numbers) => {
@@ -55,6 +57,11 @@ generateBtn.addEventListener('click', () => {
     displayNumbers(lottoNumbers);
 });
 
-// Initial generation
-const initialNumbers = generateLottoNumbers();
-displayNumbers(initialNumbers);
+// Initial Load Logic
+const savedNumbers = localStorage.getItem('lastNumbers');
+if (savedNumbers) {
+    displayNumbers(JSON.parse(savedNumbers));
+} else {
+    const initialNumbers = generateLottoNumbers();
+    displayNumbers(initialNumbers);
+}
