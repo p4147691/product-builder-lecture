@@ -1,27 +1,53 @@
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #333;
+    --container-bg: #ffffff;
+    --container-shadow: rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.15);
+    --number-bg: #eee;
+    --number-text: #333;
+    --primary-color: #4CAF50;
+    --primary-hover: #45a049;
+    --btn-text: white;
+}
+
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f2f5;
+    --container-bg: #2d2d2d;
+    --container-shadow: rgba(0,0,0,0.3), 0 6px 6px rgba(0,0,0,0.4);
+    --number-bg: #444;
+    --number-text: #f0f2f5;
+    --primary-color: #66bb6a;
+    --primary-hover: #81c784;
+}
+
 body {
     font-family: sans-serif;
-    background-color: #f0f2f5;
-    background-image: subtle-noise-texture.png;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: var(--container-bg);
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px var(--container-shadow);
     text-align: center;
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 h1 {
     font-size: 2.5rem;
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 20px;
+    transition: color 0.3s ease;
 }
 
 .numbers-container {
@@ -35,18 +61,20 @@ h1 {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #eee;
+    background-color: var(--number-bg);
+    color: var(--number-text);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
 #generate-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--btn-text);
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -61,8 +89,32 @@ h1 {
 }
 
 #generate-btn:hover {
-    background-color: #45a049;
+    background-color: var(--primary-hover);
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#theme-toggle:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+body.dark-theme #theme-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
 }
 
 /* Responsive Design */
