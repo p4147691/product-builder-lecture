@@ -4,10 +4,19 @@ const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
 // Theme Logic
-const currentTheme = localStorage.getItem('theme');
+// Default to 'dark' if no preference is saved
+let currentTheme = localStorage.getItem('theme');
+if (!currentTheme) {
+    currentTheme = 'dark';
+    localStorage.setItem('theme', 'dark');
+}
+
 if (currentTheme === 'dark') {
     body.classList.add('dark-theme');
     themeToggle.textContent = '🌙';
+} else {
+    body.classList.remove('dark-theme');
+    themeToggle.textContent = '☀️';
 }
 
 themeToggle.addEventListener('click', () => {

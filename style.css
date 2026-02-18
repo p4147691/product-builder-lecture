@@ -35,25 +35,39 @@ body {
     font-family: sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
-    padding: 20px 0;
 }
 
-.container {
+.page-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.main-content {
+    flex: 1.2;
+    max-width: 600px;
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 350px;
+}
+
+.card {
     background-color: var(--container-bg);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 20px var(--container-shadow);
-    text-align: center;
     position: relative;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    width: 90%;
-    max-width: 600px;
 }
 
 h1, h2 {
@@ -61,7 +75,7 @@ h1, h2 {
     transition: color 0.3s ease;
 }
 
-h1 { font-size: 2rem; margin-bottom: 20px; }
+h1 { font-size: 2rem; margin-top: 0; margin-bottom: 20px; text-align: center; }
 h2 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 15px; }
 
 .numbers-container {
@@ -83,7 +97,6 @@ h2 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 15px; }
     font-size: 1.25rem;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
 }
 
 #generate-btn, #submit-btn {
@@ -113,7 +126,7 @@ h2 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 15px; }
     margin: 30px 0;
 }
 
-/* Section Styles */
+/* Contact & Comments Section */
 .contact-section, .comments-section {
     text-align: left;
 }
@@ -147,7 +160,7 @@ h2 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 15px; }
 }
 
 .form-group textarea {
-    height: 80px;
+    height: 100px;
     resize: none;
 }
 
@@ -175,8 +188,21 @@ body.dark-theme #theme-toggle:hover {
 }
 
 /* Responsive Design */
+@media (max-width: 1000px) {
+    .page-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-content, .sidebar {
+        width: 100%;
+        max-width: 600px;
+        min-width: unset;
+    }
+}
+
 @media (max-width: 600px) {
-    .container {
+    .card {
         padding: 20px;
     }
 
