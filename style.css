@@ -41,6 +41,7 @@ body {
     min-height: 100vh;
     margin: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 20px 0;
 }
 
 .container {
@@ -52,7 +53,7 @@ body {
     position: relative;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     width: 90%;
-    max-width: 450px;
+    max-width: 600px;
 }
 
 h1, h2 {
@@ -112,8 +113,8 @@ h2 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 15px; }
     margin: 30px 0;
 }
 
-/* Form Styles */
-.contact-section {
+/* Section Styles */
+.contact-section, .comments-section {
     text-align: left;
 }
 
