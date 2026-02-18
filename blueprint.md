@@ -17,6 +17,8 @@ A modern, framework-less web application for generating Lotto numbers (1-45). Bu
 - **Integrations:**
     - **Formspree:** Used for handling form submissions (Endpoint: `https://formspree.io/f/xdalddzk`).
     - **Disqus:** Community comments section (Shortname: `productbuilder-gwwnslrqum`).
+- **Deployment:**
+    - **GitHub Pages:** Automated deployment via GitHub Actions (`.github/workflows/deploy.yml`).
 - **Styling:**
     - Uses CSS variables for consistent color management.
     - Two-column layout on desktop for better space utilization.
@@ -27,9 +29,6 @@ A modern, framework-less web application for generating Lotto numbers (1-45). Bu
     - `localStorage` for saving theme preference, defaulting to 'dark'.
 
 ## Current Tasks / Plan
-1. **Update Layout & Default Theme:**
-    - [x] Set 'dark' as the default theme in `main.js`.
-    - [x] Restructure `index.html` for a two-column layout.
-    - [x] Update `style.css` to handle side-by-side components.
-2. **Deployment:**
-    - [x] Commit and push changes to GitHub repository.
+1. **Automate Deployment:**
+    - [x] Create GitHub Actions workflow for static site deployment.
+    - [x] Push all changes to trigger initial automated deploy.
