@@ -21,9 +21,14 @@ A high-end, trend-setting web utility featuring an **AI Clothing Classifier** an
 - **Frontend:** Vanilla HTML5, CSS3, JavaScript (ES6+).
 
 ## Current Tasks / Plan
-1. **Design Overhaul:**
-    - [ ] Implement Glassmorphism CSS variables and styles.
-    - [ ] Add background decorative blobs for a modern look.
-2. **Animation Polish:**
-    - [ ] Smooth transitions for all mode changes.
-    - [ ] Enhanced Lotto ball entry effects.
+1. **Design Overhaul & Polishing:**
+    - [x] Implement Glassmorphism CSS variables and styles.
+    - [x] Add background decorative blobs for a modern look.
+    - [ ] **Enhance Hover Effects:** Restore upload zone hover state and add "light-spreading" glow to buttons.
+    - [ ] **Restore Lotto Balls:** Re-implement the 3D spherical UI for lotto numbers with dynamic gradients.
+    - [ ] **Background Enrichment:** Add subtle noise texture and more complex gradient layers for depth.
+2. **Content Enrichment (AdSense Optimization):**
+    - [ ] Add "How It Works" step-by-step guide.
+    - [ ] Include a "Technical Analysis" section with more depth on CNNs.
+    - [ ] Expand the "Fashion & Technology" blog-style articles.
+    - [ ] Ensure all legal and navigation links are prominent.

@@ -175,11 +175,12 @@ function generateLottoNumbers() {
             ball.className = 'lotto-ball';
             ball.textContent = num;
             
-            if (num <= 10) ball.style.background = 'radial-gradient(circle at 30% 30%, #facc15, #eab308)';
-            else if (num <= 20) ball.style.background = 'radial-gradient(circle at 30% 30%, #60a5fa, #2563eb)';
-            else if (num <= 30) ball.style.background = 'radial-gradient(circle at 30% 30%, #f87171, #dc2626)';
-            else if (num <= 40) ball.style.background = 'radial-gradient(circle at 30% 30%, #94a3b8, #475569)';
-            else ball.style.background = 'radial-gradient(circle at 30% 30%, #4ade80, #16a34a)';
+            // 숫자에 따른 클래스 부여 (색상 및 3D 효과는 CSS에서 처리)
+            if (num <= 10) ball.classList.add('ball-yellow');
+            else if (num <= 20) ball.classList.add('ball-blue');
+            else if (num <= 30) ball.classList.add('ball-red');
+            else if (num <= 40) ball.classList.add('ball-gray');
+            else ball.classList.add('ball-green');
             
             container.appendChild(ball);
         }, index * 100);
