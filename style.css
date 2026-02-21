@@ -317,8 +317,108 @@ h1 {
 /* Sidebar / Disqus */
 .comments-section h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
 
+/* Premium Ad Banner */
+.ad-banner-card {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.ad-banner-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.ad-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ad-tag {
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 900;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.ad-info h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ad-info p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+}
+
+.ad-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    color: black;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.ad-cta:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+.ad-visual {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.ad-blob {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: morphing 10s infinite alternate;
+}
+
+@keyframes morphing {
+    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%; }
+    100% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+}
+
 @media (max-width: 1000px) {
     .page-wrapper { flex-direction: column; }
     h1 { font-size: 2.2rem; }
     .card { padding: 2rem; }
+    .ad-content { flex-direction: column; text-align: center; }
+    .ad-info p { margin-left: auto; margin-right: auto; }
+    .ad-visual { display: none; }
 }
