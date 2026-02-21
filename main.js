@@ -10,9 +10,9 @@ const body = document.body;
 
 const savedTheme = localStorage.getItem('theme') || 'dark';
 body.className = savedTheme + '-theme';
-themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+if (themeToggle) themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
-themeToggle.addEventListener('click', () => {
+themeToggle?.addEventListener('click', () => {
     const isDark = body.classList.contains('dark-theme');
     const newTheme = isDark ? 'light' : 'dark';
     body.className = newTheme + '-theme';
@@ -34,6 +34,7 @@ async function ensureModelLoaded() {
 
 function prepareLabelUI() {
     labelContainer = document.getElementById("label-container");
+    if (!labelContainer) return;
     labelContainer.innerHTML = '';
     for (let i = 0; i < maxPredictions; i++) {
         const resultItem = document.createElement("div");
@@ -60,10 +61,11 @@ async function startWebcam() {
     const webcamContainer = document.getElementById("webcam-container");
     const placeholder = document.getElementById("placeholder");
     
-    startBtn.disabled = true;
-    startBtn.textContent = "웹캠 준비 중...";
+    if (startBtn) {
+        startBtn.disabled = true;
+        startBtn.textContent = "웹캠 준비 중...";
+    }
     
-    // Hide image preview
     imagePreview.style.display = 'none';
     placeholder.style.display = 'none';
 
@@ -79,12 +81,14 @@ async function startWebcam() {
         webcamContainer.appendChild(webcam.canvas);
         webcamContainer.style.display = 'block';
         
-        startBtn.style.display = 'none';
+        if (startBtn) startBtn.style.display = 'none';
     } catch (error) {
         console.error("Webcam Error:", error);
         alert("카메라를 시작할 수 없습니다. 권한을 확인해주세요.");
-        startBtn.disabled = false;
-        startBtn.textContent = "🎥 실시간 분류 시작";
+        if (startBtn) {
+            startBtn.disabled = false;
+            startBtn.textContent = "🎥 실시간 스캔 시작";
+        }
         placeholder.style.display = 'flex';
     }
 }
@@ -96,30 +100,27 @@ async function loop() {
     window.requestAnimationFrame(loop);
 }
 
-// Image File Mode
-async function handleFileUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+// Unified Image Processing (for File Input and Drag & Drop)
+async function processImageFile(file) {
+    if (!file || !file.type.startsWith('image/')) return;
 
     const startBtn = document.getElementById('start-btn');
     const imagePreview = document.getElementById('image-preview');
     const webcamContainer = document.getElementById("webcam-container");
     const placeholder = document.getElementById("placeholder");
 
-    // Stop webcam if running
     if (isWebcamRunning) {
         isWebcamRunning = false;
-        if (webcam) {
-            webcam.stop();
-        }
+        if (webcam) webcam.stop();
     }
     
-    // UI Reset for File Mode
     webcamContainer.style.display = 'none';
     placeholder.style.display = 'none';
-    startBtn.style.display = 'inline-flex';
-    startBtn.disabled = false;
-    startBtn.textContent = "🎥 실시간 분류 시작";
+    if (startBtn) {
+        startBtn.style.display = 'inline-flex';
+        startBtn.disabled = false;
+        startBtn.textContent = "🎥 실시간 스캔 시작";
+    }
 
     await ensureModelLoaded();
 
@@ -127,13 +128,16 @@ async function handleFileUpload(event) {
     reader.onload = function(e) {
         imagePreview.src = e.target.result;
         imagePreview.style.display = 'block';
-        
-        // Wait for image to load before predicting
         imagePreview.onload = async () => {
             await predict(imagePreview);
         };
     };
     reader.readAsDataURL(file);
+}
+
+async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    await processImageFile(file);
 }
 
 async function predict(imageElement) {
@@ -147,7 +151,7 @@ async function predict(imageElement) {
         if (bar && probText) {
             bar.style.width = probability + "%";
             probText.textContent = probability + "%";
-            bar.style.backgroundColor = prediction[i].probability > 0.5 ? "var(--primary-color)" : "var(--text-secondary)";
+            bar.style.backgroundColor = prediction[i].probability > 0.5 ? "var(--primary)" : "rgba(255,255,255,0.2)";
         }
     }
 }
@@ -155,6 +159,7 @@ async function predict(imageElement) {
 // --- Lotto Logic ---
 function generateLottoNumbers() {
     const container = document.querySelector('.numbers-container');
+    if (!container) return;
     container.innerHTML = '';
     
     const numbers = new Set();
@@ -181,10 +186,36 @@ function generateLottoNumbers() {
     });
 }
 
-// --- Event Listeners ---
-document.getElementById('start-btn').addEventListener('click', startWebcam);
-document.getElementById('image-upload').addEventListener('change', handleFileUpload);
-document.getElementById('generate-btn').addEventListener('click', generateLottoNumbers);
+// --- Interaction & Event Listeners ---
+const webcamFrame = document.querySelector('.webcam-frame');
+const imageUpload = document.getElementById('image-upload');
+
+// Click to Upload
+webcamFrame?.addEventListener('click', () => {
+    imageUpload.click();
+});
+
+// Drag and Drop Logic
+webcamFrame?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    webcamFrame.classList.add('drag-over');
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    webcamFrame?.addEventListener(eventName, () => {
+        webcamFrame.classList.remove('drag-over');
+    });
+});
+
+webcamFrame?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    processImageFile(file);
+});
+
+document.getElementById('start-btn')?.addEventListener('click', startWebcam);
+imageUpload?.addEventListener('change', handleFileUpload);
+document.getElementById('generate-btn')?.addEventListener('click', generateLottoNumbers);
 
 // Initial Lotto Generation
 generateLottoNumbers();
