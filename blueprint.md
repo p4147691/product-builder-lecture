@@ -1,34 +1,29 @@
 # AI Smart Hub - Project Blueprint
 
 ## Overview
-A multi-functional web utility featuring an **AI Clothing Classifier** and a **Lotto Number Generator**. This project combines deep learning (TensorFlow.js) with practical daily tools in a premium, dark-themed interface.
+A high-end, trend-setting web utility featuring an **AI Clothing Classifier** and a **Lotto Number Generator**. Designed with a "Gen-Z" aesthetic, focusing on visual impact, glassmorphism, and immersive interactions.
 
 ## Key Features
-1. **AI Clothing Classifier (Dual Mode):**
-    - **Real-time Webcam:** Instant classification via live camera feed.
-    - **Image Upload:** Supports analyzing static image files (JPG, PNG) for users without cameras or who prefer privacy.
-    - **Categories:** Underwear, Swimwear, and Everyday Wear.
-2. **Lotto Number Generator:**
-    - Generates 6 unique random numbers (1-45).
-    - Visual representation of numbers in styled circles.
-3. **Premium Design:**
-    - Fully responsive, dark-themed UI.
-    - Glassmorphism effects and interactive progress bars for AI results.
+1. **AI Clothing Classifier (Premium Scan Mode):**
+    - Futuristic scanning UI with neon feedback.
+    - Dual mode: Real-time webcam and high-quality image upload.
+2. **Lotto Number Generator (Glass Orbs):**
+    - Numbers presented as 3D glass orbs with dynamic lighting.
+    - Satisfying "pop-in" animations and unique color coding.
+3. **Immersive UI/UX (Glassmorphism):**
+    - Deep dark mode with background color blobs for depth.
+    - Translucent frosted-glass cards with subtle neon borders.
+    - Bold, high-contrast typography for a premium feel.
 
 ## Technical Details
 - **AI Engine:** TensorFlow.js & Teachable Machine Image Model.
+- **Visuals:** CSS3 Glassmorphism, Backdrop Filters, Keyframe Animations.
 - **Frontend:** Vanilla HTML5, CSS3, JavaScript (ES6+).
-- **External Integrations:**
-    - Formspree (Contact Form)
-    - Disqus (Comments)
-- **Deployment:** GitHub Pages (Automated via Actions).
 
 ## Current Tasks / Plan
-1. **Restore & Merge Features:**
-    - [ ] Add Lotto UI card back to the layout.
-    - [ ] Add Image Upload input to the AI section.
-2. **Enhanced JavaScript Logic:**
-    - [ ] Implement file reader to process uploaded images.
-    - [ ] Re-implement the unique Lotto number generation logic.
-3. **UI Refinement:**
-    - [ ] Style the new "Upload" button and "Lotto" card to match the premium theme.
+1. **Design Overhaul:**
+    - [ ] Implement Glassmorphism CSS variables and styles.
+    - [ ] Add background decorative blobs for a modern look.
+2. **Animation Polish:**
+    - [ ] Smooth transitions for all mode changes.
+    - [ ] Enhanced Lotto ball entry effects.
