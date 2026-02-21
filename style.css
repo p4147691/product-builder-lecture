@@ -131,7 +131,8 @@ h1 {
 .webcam-frame canvas, #image-preview {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #000;
 }
 
 #start-btn, .upload-label {

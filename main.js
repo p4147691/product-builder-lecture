@@ -22,7 +22,6 @@ themeToggle.addEventListener('click', () => {
 
 // --- AI Model Logic ---
 
-// Load model if not already loaded
 async function ensureModelLoaded() {
     if (!model) {
         const modelURL = URL + "model.json";
@@ -58,10 +57,15 @@ async function startWebcam() {
     await ensureModelLoaded();
     const startBtn = document.getElementById('start-btn');
     const imagePreview = document.getElementById('image-preview');
+    const webcamContainer = document.getElementById("webcam-container");
+    const placeholder = document.getElementById("placeholder");
     
     startBtn.disabled = true;
     startBtn.textContent = "웹캠 준비 중...";
+    
+    // Hide image preview
     imagePreview.style.display = 'none';
+    placeholder.style.display = 'none';
 
     try {
         const flip = true;
@@ -71,9 +75,9 @@ async function startWebcam() {
         isWebcamRunning = true;
         window.requestAnimationFrame(loop);
 
-        const webcamContainer = document.getElementById("webcam-container");
         webcamContainer.innerHTML = ''; 
         webcamContainer.appendChild(webcam.canvas);
+        webcamContainer.style.display = 'block';
         
         startBtn.style.display = 'none';
     } catch (error) {
@@ -81,6 +85,7 @@ async function startWebcam() {
         alert("카메라를 시작할 수 없습니다. 권한을 확인해주세요.");
         startBtn.disabled = false;
         startBtn.textContent = "🎥 실시간 분류 시작";
+        placeholder.style.display = 'flex';
     }
 }
 
@@ -96,37 +101,43 @@ async function handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
+    const startBtn = document.getElementById('start-btn');
+    const imagePreview = document.getElementById('image-preview');
+    const webcamContainer = document.getElementById("webcam-container");
+    const placeholder = document.getElementById("placeholder");
+
     // Stop webcam if running
     if (isWebcamRunning) {
         isWebcamRunning = false;
-        if (webcam) webcam.stop();
-        document.getElementById('start-btn').style.display = 'inline-flex';
-        document.getElementById('start-btn').disabled = false;
-        document.getElementById('start-btn').textContent = "🎥 실시간 분류 시작";
+        if (webcam) {
+            webcam.stop();
+        }
     }
+    
+    // UI Reset for File Mode
+    webcamContainer.style.display = 'none';
+    placeholder.style.display = 'none';
+    startBtn.style.display = 'inline-flex';
+    startBtn.disabled = false;
+    startBtn.textContent = "🎥 실시간 분류 시작";
 
     await ensureModelLoaded();
 
     const reader = new FileReader();
-    reader.onload = async function(e) {
-        const img = document.getElementById('image-preview');
-        img.src = e.target.result;
-        img.style.display = 'block';
+    reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
         
-        // Remove canvas if exists
-        const webcamContainer = document.getElementById("webcam-container");
-        const canvas = webcamContainer.querySelector('canvas');
-        if (canvas) canvas.remove();
-
-        // Predict after image is loaded
-        img.onload = async () => {
-            await predict(img);
+        // Wait for image to load before predicting
+        imagePreview.onload = async () => {
+            await predict(imagePreview);
         };
     };
     reader.readAsDataURL(file);
 }
 
 async function predict(imageElement) {
+    if (!model) return;
     const prediction = await model.predict(imageElement);
     for (let i = 0; i < maxPredictions; i++) {
         const probability = (prediction[i].probability * 100).toFixed(0);
@@ -159,7 +170,6 @@ function generateLottoNumbers() {
             ball.className = 'lotto-ball';
             ball.textContent = num;
             
-            // Apply different colors based on number range
             if (num <= 10) ball.style.background = 'radial-gradient(circle at 30% 30%, #facc15, #eab308)';
             else if (num <= 20) ball.style.background = 'radial-gradient(circle at 30% 30%, #60a5fa, #2563eb)';
             else if (num <= 30) ball.style.background = 'radial-gradient(circle at 30% 30%, #f87171, #dc2626)';
