@@ -4,16 +4,16 @@
     --secondary: #a855f7;
     --accent: #10b981;
     --bg-dark: #050507;
-    --glass-bg: rgba(15, 23, 42, 0.7); /* 더 어둡고 불투명한 배경으로 가독성 확보 */
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(10, 15, 30, 0.85); /* 투명도를 더 낮춰(더 불투명) 배경 간섭을 완벽히 차단 */
+    --glass-border: rgba(255, 255, 255, 0.15);
     --text-main: #ffffff;
-    --text-dim: #cbd5e1; /* 대비를 위해 조금 더 밝은 회색으로 변경 */
+    --text-dim: #cbd5e1;
 }
 
 .light-theme {
     --bg-dark: #f8fafc;
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(0, 0, 0, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(0, 0, 0, 0.1);
     --text-main: #0f172a;
     --text-dim: #475569;
 }
@@ -33,10 +33,9 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     transition: background-color 0.5s ease;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* 전반적인 텍스트 선명도 향상 */
 }
 
-/* Background Decorations */
+/* Background Decorations - 더 은은하게 조정 */
 .blob-container {
     position: fixed;
     top: 0;
@@ -44,24 +43,24 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    filter: blur(80px);
+    filter: blur(100px); /* 블러를 더 높여서 경계를 뭉갬 */
     overflow: hidden;
 }
 
 .blob {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.25; /* 투명도를 낮춰 배경이 너무 튀지 않게 조절 */
-    animation: move 20s infinite alternate;
+    opacity: 0.15; /* 투명도를 더 낮춰서 글자 가독성 방해 최소화 */
+    animation: move 25s infinite alternate;
 }
 
-.blob-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; left: -100px; }
-.blob-2 { width: 350px; height: 350px; background: var(--secondary); bottom: -50px; right: -50px; animation-delay: -5s; }
-.blob-3 { width: 300px; height: 300px; background: #f43f5e; top: 40%; left: 60%; animation-delay: -10s; }
+.blob-1 { width: 500px; height: 500px; background: var(--primary); top: -150px; left: -100px; }
+.blob-2 { width: 450px; height: 450px; background: var(--secondary); bottom: -100px; right: -50px; animation-delay: -5s; }
+.blob-3 { width: 400px; height: 400px; background: #f43f5e; top: 30%; left: 70%; animation-delay: -10s; }
 
 @keyframes move {
     from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(100px, 50px) scale(1.1); }
+    to { transform: translate(150px, 80px) scale(1.2); }
 }
 
 /* Navigation */
@@ -69,22 +68,22 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(5, 5, 7, 0.9); /* 네비게이션바 배경 강화 */
-    backdrop-filter: blur(15px);
+    background: rgba(5, 5, 7, 0.95);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
 }
 
 .nav-container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 900;
     text-decoration: none;
     color: white;
@@ -98,111 +97,52 @@ body {
     text-decoration: none;
     margin-left: 2rem;
     font-weight: 600;
-    transition: color 0.3s;
+    transition: all 0.3s;
 }
 
-.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover { color: white; text-shadow: 0 0 10px var(--primary-glow); }
 
 /* Layout */
 .page-wrapper {
     display: flex;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 3rem 1.5rem;
     gap: 2rem;
 }
 
 .main-content { flex: 2; }
 .sidebar { flex: 1; }
 
-/* Glassmorphism Card */
+/* Glassmorphism Card - 가독성 핵심 */
 .card {
     background: var(--glass-bg);
-    backdrop-filter: blur(25px); /* 블러 강도를 높여 배경색 간섭 차단 */
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border: 1px solid var(--glass-border);
     border-radius: 2rem;
-    padding: 3rem;
+    padding: 3.5rem;
     margin-bottom: 2rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 900;
     letter-spacing: -0.05em;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #ffffff, #e2e8f0);
+    margin-bottom: 0.8rem;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .subtitle {
     color: var(--text-dim);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     margin-bottom: 2.5rem;
-    font-weight: 500;
-}
-
-/* Info Content & FAQ */
-.info-content {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--glass-border);
-}
-
-.info-content h3 { margin-bottom: 1rem; color: var(--primary); }
-.info-content p { color: var(--text-dim); line-height: 1.8; margin-bottom: 1rem; }
-.info-content ul { padding-left: 1.5rem; color: var(--text-dim); margin-bottom: 1rem; }
-
-/* Insights Section */
-.insight-article {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.insight-article article h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    color: var(--text-main);
-}
-
-.insight-article article p {
-    color: var(--text-dim);
-    line-height: 1.8;
-    font-size: 1.05rem;
-}
-
-.sub-separator {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(to right, var(--glass-border), transparent);
-    margin: 1rem 0;
-}
-
-.faq-list { display: grid; gap: 1.5rem; }
-.faq-item h4 { margin-bottom: 0.5rem; color: var(--text-main); font-size: 1.1rem; }
-.faq-item p { color: var(--text-dim); line-height: 1.6; }
-
-/* Theme Toggle */
-#theme-toggle {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: white;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    z-index: 10;
+    line-height: 1.6;
 }
 
 /* AI Section */
@@ -223,74 +163,74 @@ h1 {
 .webcam-frame:hover {
     border-color: var(--primary);
     border-style: solid;
-    background: rgba(99, 102, 241, 0.12);
-    box-shadow: 0 0 20px var(--primary-glow), 
-                0 0 40px var(--primary-glow);
-    transform: translateY(-8px) scale(1.01);
+    background: rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 30px var(--primary-glow);
+    transform: translateY(-5px);
 }
 
-.webcam-frame canvas, #image-preview {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain;
+.ai-controls {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
 }
 
-.ai-controls { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; }
-
+/* 버튼 색상 통일 및 프리미엄 스타일 적용 */
 #start-btn, .upload-label {
-    flex: 1; padding: 1.2rem; border-radius: 1.2rem; font-weight: 700; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+    flex: 1;
+    padding: 1.2rem;
+    border-radius: 1.2rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: none;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
 }
 
-#start-btn { background: var(--primary); color: white; border: none; box-shadow: 0 0 20px var(--primary-glow); }
-.upload-label { background: transparent; border: 2px solid var(--glass-border); color: var(--text-main); }
+#start-btn:hover, .upload-label:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
+    filter: brightness(1.1);
+}
+
+#start-btn:active, .upload-label:active { transform: translateY(-2px); }
 
 /* Results */
-.results-grid { display: grid; gap: 1rem; width: 100%; }
-.result-item { background: rgba(255, 255, 255, 0.08); padding: 1.2rem; border-radius: 1.2rem; border: 1px solid var(--glass-border); }
-.progress-bar-container { height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; }
-.progress-bar { height: 100%; background: linear-gradient(to right, var(--primary), var(--secondary)); width: 0%; transition: width 0.4s ease; }
-
-/* Lotto */
-.numbers-container { display: flex; justify-content: center; gap: 1.2rem; margin: 2rem 0; flex-wrap: wrap; }
-.lotto-ball {
-    width: 4rem; height: 4rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem; font-weight: 900; color: white; box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.2); animation: ballIn 0.6s ease both;
-}
-
-/* Ad Areas */
-.ad-banner-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
+.result-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.2rem;
+    border-radius: 1.2rem;
     border: 1px solid var(--glass-border);
-    border-radius: 2rem; padding: 2rem; margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    border-radius: 4px;
+}
+
+/* Insights Section */
+.insight-article article h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #fff; }
+.insight-article article p { color: var(--text-dim); line-height: 1.8; font-size: 1.1rem; }
 
 /* Footer */
 .main-footer {
-    background: rgba(5, 5, 7, 0.95);
-    padding: 4rem 1.5rem;
+    background: #000;
+    padding: 5rem 1.5rem;
     border-top: 1px solid var(--glass-border);
-    margin-top: 4rem;
 }
 
-.footer-container {
-    max-width: 1300px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-}
-
-.footer-info h3 { margin-bottom: 1rem; }
-.footer-info p { color: var(--text-dim); }
-.footer-links a { display: block; color: var(--text-dim); text-decoration: none; margin-bottom: 0.8rem; }
-.footer-links a:hover { color: var(--primary); }
-.footer-copy { grid-column: 1 / -1; text-align: center; color: var(--text-dim); padding-top: 2rem; border-top: 1px solid var(--glass-border); }
+.footer-copy { text-align: center; color: var(--text-dim); margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--glass-border); }
 
 @media (max-width: 1000px) {
     .page-wrapper { flex-direction: column; }
-    h1 { font-size: 2.2rem; }
-    .nav-links { display: none; }
+    h1 { font-size: 2.5rem; }
+    .ai-controls { flex-direction: column; }
 }
