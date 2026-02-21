@@ -109,6 +109,13 @@ h1 {
     margin: 2rem 0;
 }
 
+.ai-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .webcam-frame {
     width: 100%;
     max-width: 400px;
@@ -121,49 +128,85 @@ h1 {
     box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
 }
 
-.webcam-frame canvas {
+.webcam-frame canvas, #image-preview {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover;
 }
 
-.webcam-placeholder {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-align: center;
-    padding: 2rem;
-}
-
-.webcam-placeholder .icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-}
-
-#start-btn {
+#start-btn, .upload-label {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
     color: white;
     border: none;
-    padding: 1rem 3rem;
-    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     border-radius: 1rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#start-btn:hover {
+.upload-label {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+}
+
+#start-btn:hover, .upload-label:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.5);
+    opacity: 0.95;
 }
 
-#start-btn:active {
-    transform: translateY(0);
+/* Lotto Section Styles */
+.lotto-section {
+    text-align: center;
+}
+
+.numbers-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.lotto-ball {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: radial-gradient(circle at 30% 30%, var(--primary-color), var(--primary-hover));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    box-shadow: var(--shadow-md), inset -4px -4px 8px rgba(0,0,0,0.2);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#generate-btn {
+    background: var(--text-primary);
+    color: var(--card-bg);
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#generate-btn:hover {
+    transform: scale(1.05);
 }
 
 /* Results Display */
